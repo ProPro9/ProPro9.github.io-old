@@ -29,16 +29,18 @@
 
             --accent: #0047ab;
             --accent-dark: #00357f;
-            --blue: #5352ed;
+            --blue: #0047ab;
 
             --sidebar-width: 240px;
         }
 
         body {
+            cursor: none;
+
             background:
                 radial-gradient(
                     circle at 80% 10%,
-                    rgba(83, 82, 237, 0.08),
+                    rgba(0, 71, 171, 0.08),
                     transparent 30%
                 ),
                 radial-gradient(
@@ -204,7 +206,7 @@
             font-size: 11px;
             font-weight: bold;
 
-            cursor: pointer;
+            cursor: none;
 
             transition:
                 background 0.2s ease,
@@ -311,6 +313,8 @@
         }
 
         .button {
+            cursor: none;
+
             display: inline-flex;
             align-items: center;
 
@@ -468,6 +472,46 @@
             text-decoration: underline;
         }
 
+
+        .project-card.featured {
+            grid-column: span 2;
+            min-height: 260px;
+        }
+
+        .project-card {
+            --mx: 50%;
+            --my: 50%;
+        }
+
+        .project-card::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    320px circle at var(--mx) var(--my),
+                    rgba(30, 110, 219, 0.09),
+                    transparent 65%
+                );
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: opacity 0.2s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .project-card.featured {
+                grid-column: span 1;
+            }
+        }
+
         /* --------------------------------
            SCREENSHOTS
         -------------------------------- */
@@ -501,7 +545,7 @@
 
             object-fit: cover;
 
-            cursor: pointer;
+            cursor: none;
 
             transition:
                 transform 0.3s ease,
@@ -659,7 +703,7 @@
             font-size: 28px;
             color: white;
 
-            cursor: pointer;
+            cursor: none;
         }
 
         /* --------------------------------
@@ -684,6 +728,61 @@
         }
 
 
+
+        /* --------------------------------
+           CUSTOM CURSOR
+        -------------------------------- */
+
+        .cursor-dot {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #e6f0ff;
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.35),
+                0 0 10px rgba(230, 240, 255, 0.35);
+
+            pointer-events: none;
+            z-index: 9999;
+
+            transform:
+                translate(-50%, -50%);
+
+            opacity: 0;
+
+            transition:
+                opacity 0.12s ease,
+                width 0.12s ease,
+                height 0.12s ease;
+        }
+
+        a:hover ~ .cursor-dot,
+        button:hover ~ .cursor-dot {
+            width: 11px;
+            height: 11px;
+        }
+
+        @media (pointer: coarse) {
+            body,
+            a,
+            button,
+            .button,
+            .screenshot-wrapper img,
+            .viewer-close {
+                cursor: auto;
+            }
+
+            .cursor-dot {
+                display: none;
+            }
+        }
+
         /* --------------------------------
            CURSOR GLOW
         -------------------------------- */
@@ -693,16 +792,16 @@
             left: 0;
             top: 0;
 
-            width: 420px;
-            height: 420px;
+            width: 350px;
+            height: 350px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(30, 110, 219, 0.16) 0%,
-                    rgba(30, 110, 219, 0.08) 32%,
+                    rgba(30, 110, 219, 0.14) 0%,
+                    rgba(30, 110, 219, 0.065) 32%,
                     rgba(30, 110, 219, 0.025) 55%,
                     transparent 72%
                 );
@@ -819,6 +918,7 @@
 <body>
 
     <div class="cursor-glow" id="cursor-glow"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
@@ -828,12 +928,12 @@
         </div>
 
         <div class="logo-subtitle">
-            game dev / random projects
+            games / code / other stuff
         </div>
 
         <div class="status">
             <div class="status-dot"></div>
-            probably working on something
+            supposed to be working on something
         </div>
 
         <nav class="nav">
@@ -876,7 +976,7 @@
             </h1>
 
             <p class="hero-text">
-                Mostly games, experiments, and whatever else I decide is worth making.
+                I make games, websites, and whatever else I get distracted by.
             </p>
 
             <div class="hero-buttons">
@@ -918,13 +1018,13 @@
                 <br>
 
                 <p class="muted">
-                    I make games, mess with code, and usually have at least one project that is nowhere near finished.
+                    I make games, mess with code, and usually have at least one unfinished thing open somewhere.
                 </p>
 
                 <br>
 
                 <p class="muted">
-                    This is where I keep the projects, screenshots, and other things I actually want to show people.
+                    This is basically where I dump the projects and screenshots I actually want people to see.
                 </p>
 
             </div>
@@ -945,7 +1045,7 @@
 
             <div class="projects-grid">
 
-                <div class="project-card">
+                <div class="project-card featured">
 
                     <div class="project-number">
                         PROJECT_001
@@ -956,7 +1056,7 @@
                     </h3>
 
                     <p>
-                        A PS1-inspired horror game set inside a simulated backrooms environment.
+                        A PS1-inspired horror game set inside a simulated version of the Backrooms.
                     </p>
 
                     <div class="tags">
@@ -974,7 +1074,6 @@
 
                 </div>
 
-
                 <div class="project-card">
 
                     <div class="project-number">
@@ -982,32 +1081,11 @@
                     </div>
 
                     <h3>
-                        Empty Slot
-                    </h3>
-
-                    <p>
-                        Nothing here yet.
-                    </p>
-
-                    <div class="tags">
-                        <span class="tag">Nothing</span>
-                    </div>
-
-                </div>
-
-
-                <div class="project-card">
-
-                    <div class="project-number">
-                        PROJECT_003
-                    </div>
-
-                    <h3>
                         More Eventually
                     </h3>
 
                     <p>
-                        Reserved for whatever I end up making next.
+                        Whatever I end up making next goes here.
                     </p>
 
                     <div class="tags">
@@ -1074,7 +1152,7 @@
                     </strong>
 
                     <span>
-                        Game builds and project pages.
+                        Games and whatever I actually finish.
                     </span>
 
                 </a>
@@ -1091,7 +1169,7 @@
                     </strong>
 
                     <span>
-                        Community server.
+                        My Discord server.
                     </span>
 
                 </a>
@@ -1108,7 +1186,7 @@
                     </strong>
 
                     <span>
-                        Dev stuff, clips, and random uploads.
+                        Dev stuff, clips, and random videos.
                     </span>
 
                 </a>
@@ -1379,6 +1457,66 @@
                     "_blank",
                     "noopener,noreferrer"
                 );
+
+            }
+        );
+
+
+
+        /*
+         * --------------------------------
+         * PROJECT CARD HOVER
+         * --------------------------------
+         */
+
+        document.querySelectorAll(".project-card").forEach(card => {
+
+            card.addEventListener("mousemove", event => {
+
+                const rect = card.getBoundingClientRect();
+
+                card.style.setProperty(
+                    "--mx",
+                    `${event.clientX - rect.left}px`
+                );
+
+                card.style.setProperty(
+                    "--my",
+                    `${event.clientY - rect.top}px`
+                );
+
+            });
+
+        });
+
+
+        /*
+         * --------------------------------
+         * CUSTOM CURSOR
+         * --------------------------------
+         */
+
+        const cursorDot =
+            document.getElementById("cursor-dot");
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                cursorDot.style.left = `${event.clientX}px`;
+                cursorDot.style.top = `${event.clientY}px`;
+                cursorDot.style.opacity = "1";
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseleave",
+            () => {
+
+                cursorDot.style.opacity = "0";
 
             }
         );
