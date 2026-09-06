@@ -27,8 +27,8 @@
             --text: #eeeeee;
             --muted: #9696a3;
 
-            --red: #ff4757;
-            --red-dark: #c93644;
+            --accent: #0047ab;
+            --accent-dark: #00357f;
             --blue: #5352ed;
 
             --sidebar-width: 240px;
@@ -43,7 +43,7 @@
                 ),
                 radial-gradient(
                     circle at 20% 80%,
-                    rgba(255, 71, 87, 0.06),
+                    rgba(0, 71, 171, 0.06),
                     transparent 30%
                 ),
                 var(--background);
@@ -78,11 +78,11 @@
         .logo {
             font-size: 27px;
             font-weight: bold;
-            color: var(--red);
+            color: var(--accent);
             margin-bottom: 6px;
 
             text-shadow:
-                0 0 15px rgba(255, 71, 87, 0.25);
+                0 0 15px rgba(0, 71, 171, 0.28);
         }
 
         .logo-subtitle {
@@ -171,13 +171,13 @@
         }
 
         .nav a.active {
-            background: rgba(255, 71, 87, 0.1);
-            border-color: rgba(255, 71, 87, 0.45);
-            color: var(--red);
+            background: rgba(0, 71, 171, 0.12);
+            border-color: rgba(0, 71, 171, 0.48);
+            color: var(--accent);
         }
 
         .nav a.active::before {
-            color: var(--red);
+            color: var(--accent);
         }
 
         .sidebar-bottom {
@@ -216,7 +216,7 @@
         .random-button:hover {
             background: #1e1e26;
             color: white;
-            border-color: #ff4757;
+            border-color: #0047ab;
 
             transform: translateY(-2px);
         }
@@ -261,11 +261,11 @@
         }
 
         h1 span {
-            color: var(--red);
+            color: var(--accent);
         }
 
         h2 {
-            color: var(--red);
+            color: var(--accent);
 
             font-size: 30px;
             margin-bottom: 20px;
@@ -336,18 +336,18 @@
             transform: translateY(-2px);
 
             background: var(--panel-hover);
-            border-color: var(--red);
+            border-color: var(--accent);
         }
 
         .button.primary {
-            background: var(--red);
-            border-color: var(--red);
+            background: var(--accent);
+            border-color: var(--accent);
 
             color: white;
         }
 
         .button.primary:hover {
-            background: var(--red-dark);
+            background: var(--accent-dark);
         }
 
         /* --------------------------------
@@ -407,7 +407,7 @@
             width: 4px;
             height: 100%;
 
-            background: var(--red);
+            background: var(--accent);
 
             opacity: 0;
             transition: opacity 0.2s ease;
@@ -458,7 +458,7 @@
         }
 
         .project-link {
-            color: var(--red);
+            color: var(--accent);
             text-decoration: none;
             font-weight: bold;
             font-size: 13px;
@@ -584,7 +584,7 @@
 
         .social-card:hover {
             transform: translateY(-3px);
-            border-color: var(--red);
+            border-color: var(--accent);
         }
 
         .social-card strong {
@@ -680,7 +680,56 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--red);
+            background: var(--accent);
+        }
+
+
+        /* --------------------------------
+           CURSOR GLOW
+        -------------------------------- */
+
+        .cursor-glow {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 420px;
+            height: 420px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(30, 110, 219, 0.16) 0%,
+                    rgba(30, 110, 219, 0.08) 32%,
+                    rgba(30, 110, 219, 0.025) 55%,
+                    transparent 72%
+                );
+
+            filter: blur(10px);
+
+            pointer-events: none;
+            z-index: 0;
+
+            transform:
+                translate(-50%, -50%);
+
+            opacity: 0;
+
+            transition:
+                opacity 0.2s ease;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (pointer: coarse) {
+            .cursor-glow {
+                display: none;
+            }
         }
 
         /* --------------------------------
@@ -769,6 +818,8 @@
 
 <body>
 
+    <div class="cursor-glow" id="cursor-glow"></div>
+
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
@@ -777,12 +828,12 @@
         </div>
 
         <div class="logo-subtitle">
-            professional human being
+            game dev / random projects
         </div>
 
         <div class="status">
             <div class="status-dot"></div>
-            Doing stuff or watching OnePiece nobody rlly knows
+            probably working on something
         </div>
 
         <nav class="nav">
@@ -799,11 +850,11 @@
                 id="random-video-button"
                 class="random-button"
                 type="button">
-                Click Me
+                Random video
             </button>
 
             Propro9<br>
-            Hi
+            made by me
 
         </div>
 
@@ -820,13 +871,12 @@
             </div>
 
             <h1>
-                I do<br>
+                I make<br>
                 <span>stuff.</span>
             </h1>
 
             <p class="hero-text">
-                I basically do whatever my brain thinks of
-                at either at a time of day when im busy or at 2 in the morning.
+                Mostly games, experiments, and whatever else I decide is worth making.
             </p>
 
             <div class="hero-buttons">
@@ -856,25 +906,25 @@
             </div>
 
             <h2>
-                I say "Hi"
+                About
             </h2>
 
             <div class="about-box">
 
                 <p>
-                    Well hello there.
+                    I'm Propro9.
                 </p>
 
                 <br>
 
                 <p class="muted">
-                    I'm Propro9. I do stuff :D
+                    I make games, mess with code, and usually have at least one project that is nowhere near finished.
                 </p>
 
                 <br>
 
                 <p class="muted">
-                    This website is probably where i will put the stuff i make.
+                    This is where I keep the projects, screenshots, and other things I actually want to show people.
                 </p>
 
             </div>
@@ -906,9 +956,7 @@
                     </h3>
 
                     <p>
-                        A PS1-inspired horror game where you play
-                        in a simulation of the backrooms.
-                        You will probably find intentional bugs in this one.
+                        A PS1-inspired horror game set inside a simulated backrooms environment.
                     </p>
 
                     <div class="tags">
@@ -934,11 +982,11 @@
                     </div>
 
                     <h3>
-                        NonExistent Project™
+                        Empty Slot
                     </h3>
 
                     <p>
-                        This does not exist as you can see.
+                        Nothing here yet.
                     </p>
 
                     <div class="tags">
@@ -955,17 +1003,15 @@
                     </div>
 
                     <h3>
-                        More Eventually™
+                        More Eventually
                     </h3>
 
                     <p>
-                        This is the highly advanced section reserved
-                        for projects that I have not created yet.
-                        Incredible technology.
+                        Reserved for whatever I end up making next.
                     </p>
 
                     <div class="tags">
-                        <span class="tag">Coming Soon™</span>
+                        <span class="tag">Coming Soon</span>
                     </div>
 
                 </div>
@@ -987,7 +1033,7 @@
             </h2>
 
             <p class="muted">
-                Click any screenshot to make it become unnecessarily large.
+                Click a screenshot to view it full size.
             </p>
 
             <div
@@ -1028,7 +1074,7 @@
                     </strong>
 
                     <span>
-                        A Empty Itch page..
+                        Game builds and project pages.
                     </span>
 
                 </a>
@@ -1045,7 +1091,7 @@
                     </strong>
 
                     <span>
-                        Enter the containment chamber
+                        Community server.
                     </span>
 
                 </a>
@@ -1062,7 +1108,7 @@
                     </strong>
 
                     <span>
-                        Videos, And random vids I have forgot about
+                        Dev stuff, clips, and random uploads.
                     </span>
 
                 </a>
@@ -1169,7 +1215,7 @@
                 ) {
 
                     galleryStatus.textContent =
-                        "No screenshots found. The void has consumed them.";
+                        "No screenshots found.";
 
                 }
 
@@ -1336,6 +1382,61 @@
 
             }
         );
+
+
+        /*
+         * --------------------------------
+         * CURSOR GLOW
+         * --------------------------------
+         */
+
+        const cursorGlow =
+            document.getElementById("cursor-glow");
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        let glowX = mouseX;
+        let glowY = mouseY;
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+
+                cursorGlow.style.opacity = "1";
+
+            }
+        );
+
+
+        document.addEventListener(
+            "mouseleave",
+            () => {
+
+                cursorGlow.style.opacity = "0";
+
+            }
+        );
+
+
+        function updateCursorGlow() {
+
+            glowX += (mouseX - glowX) * 0.12;
+            glowY += (mouseY - glowY) * 0.12;
+
+            cursorGlow.style.left = `${glowX}px`;
+            cursorGlow.style.top = `${glowY}px`;
+
+            requestAnimationFrame(updateCursorGlow);
+
+        }
+
+
+        updateCursorGlow();
 
     </script>
 
