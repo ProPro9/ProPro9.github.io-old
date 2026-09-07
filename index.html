@@ -203,6 +203,63 @@
             color: var(--accent);
         }
 
+
+        .nav-dropdown {
+            margin-bottom: 8px;
+        }
+
+        .nav-dropdown-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 9px 10px;
+            margin-bottom: 4px;
+
+            background: transparent;
+            border: 0;
+            border-radius: 5px;
+
+            color: #6d6d7a;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            cursor: none;
+        }
+
+        .nav-dropdown-toggle:hover {
+            color: #a9a9b5;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .nav-dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.18s ease;
+        }
+
+        .nav-dropdown.collapsed .nav-dropdown-arrow {
+            transform: rotate(-90deg);
+        }
+
+        .nav-dropdown-content {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .nav-dropdown.collapsed .nav-dropdown-content {
+            display: none;
+        }
+
+        .nav-dropdown[hidden] {
+            display: none !important;
+        }
+
         .sidebar-bottom {
             margin-top: auto;
 
@@ -534,49 +591,6 @@
         }
 
 
-        /* --------------------------------
-           PC BUILDING
-        -------------------------------- */
-
-        #pc-building[hidden],
-        #pc-nav-link[hidden] {
-            display: none !important;
-        }
-
-        .pc-build-box {
-            max-width: 900px;
-            padding: 25px;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
-        }
-
-        .pc-build-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 14px;
-            margin-top: 22px;
-        }
-
-        .pc-build-item {
-            padding: 18px;
-            background: #101015;
-            border: 1px solid #292933;
-            border-radius: 7px;
-        }
-
-        .pc-build-item strong {
-            display: block;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .pc-build-item span {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.6;
-        }
 
         /* --------------------------------
            SCREENSHOTS
@@ -992,10 +1006,29 @@
 
             .nav {
                 width: 100%;
-
-                flex-direction: row;
                 gap: 5px;
             }
+
+
+            .nav {
+                flex-direction: column;
+                min-width: 220px;
+            }
+
+            .nav-dropdown {
+                width: 100%;
+            }
+
+            .nav-dropdown-toggle {
+                display: flex;
+                padding: 8px 10px;
+            }
+
+            .nav-dropdown-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
 
             .nav a {
                 white-space: nowrap;
@@ -1057,12 +1090,42 @@
         </div>
 
         <nav class="nav">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#pc-building" id="pc-nav-link" hidden>PC Building</a>
-            <a href="#screenshots">Screenshots</a>
-            <a href="#links">Links</a>
+
+            <div class="nav-dropdown" id="main-dropdown">
+                <button
+                    class="nav-dropdown-toggle"
+                    type="button"
+                    data-dropdown="main-dropdown">
+
+                    <span>Main Stuff</span>
+                    <span class="nav-dropdown-arrow">⌄</span>
+                </button>
+
+                <div class="nav-dropdown-content">
+                    <a href="#home" class="active">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#screenshots">Screenshots</a>
+                    <a href="#links">Links</a>
+                </div>
+            </div>
+
+
+            <div class="nav-dropdown" id="pc-dropdown" hidden>
+                <button
+                    class="nav-dropdown-toggle"
+                    type="button"
+                    data-dropdown="pc-dropdown">
+
+                    <span>PC Building</span>
+                    <span class="nav-dropdown-arrow">⌄</span>
+                </button>
+
+                <div class="nav-dropdown-content">
+                    <a href="pc.html">PC Building Page</a>
+                </div>
+            </div>
+
         </nav>
 
         <div class="sidebar-bottom">
@@ -1219,60 +1282,10 @@
 
         </section>
 
-
-
-
-        <!-- PC BUILDING -->
-        <section id="pc-building" hidden>
-
-            <div class="section-label">
-                03 // pc building
-            </div>
-
-            <h2>
-                PC Building
-            </h2>
-
-            <div class="pc-build-box">
-
-                <p>
-                    I also build custom PCs.
-                </p>
-
-                <br>
-
-                <p class="muted">
-                    Pick a budget and what you want the computer to do, and I can help choose parts,
-                    put it together, set it up, and make sure everything actually works.
-                </p>
-
-                <div class="pc-build-grid">
-
-                    <div class="pc-build-item">
-                        <strong>Custom Parts Lists</strong>
-                        <span>Parts picked around your budget, games, and other stuff you want to run.</span>
-                    </div>
-
-                    <div class="pc-build-item">
-                        <strong>Assembly</strong>
-                        <span>Full PC assembly, cable management, and the extremely advanced technique of plugging everything in correctly.</span>
-                    </div>
-
-                    <div class="pc-build-item">
-                        <strong>Setup & Testing</strong>
-                        <span>Drivers, updates, basic configuration, and testing before the PC is considered done.</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- SCREENSHOTS -->
+<!-- SCREENSHOTS -->
         <section id="screenshots">
 
-            <div class="section-label" id="gallery-section-label">
+            <div class="section-label">
                 03 // gallery
             </div>
 
@@ -1301,7 +1314,7 @@
         <!-- LINKS -->
         <section id="links">
 
-            <div class="section-label" id="links-section-label">
+            <div class="section-label">
                 04 // links
             </div>
 
@@ -1404,17 +1417,8 @@
 
         async function loadSiteOptions() {
 
-            const pcSection =
-                document.getElementById("pc-building");
-
-            const pcNavLink =
-                document.getElementById("pc-nav-link");
-
-            const gallerySectionLabel =
-                document.getElementById("gallery-section-label");
-
-            const linksSectionLabel =
-                document.getElementById("links-section-label");
+            const pcDropdown =
+                document.getElementById("pc-dropdown");
 
             let pcEnabled = false;
 
@@ -1434,7 +1438,9 @@
 
                 const options = {};
 
-                text.split(/\r?\n/).forEach(line => {
+                text.split(/
+?
+/).forEach(line => {
 
                     const cleanLine =
                         line
@@ -1474,40 +1480,13 @@
             } catch (error) {
 
                 console.info(
-                    "options.txt was not found or could not be read. Optional sections will stay disabled.",
+                    "options.txt was not found or could not be read. PC Building will stay hidden.",
                     error
                 );
 
             }
 
-            if (pcEnabled) {
-
-                pcSection.hidden = false;
-                pcNavLink.hidden = false;
-
-                gallerySectionLabel.textContent =
-                    "04 // gallery";
-
-                linksSectionLabel.textContent =
-                    "05 // links";
-
-                // Start observing the newly enabled section for sidebar highlighting.
-                if (typeof observer !== "undefined") {
-                    observer.observe(pcSection);
-                }
-
-            } else {
-
-                pcSection.hidden = true;
-                pcNavLink.hidden = true;
-
-                gallerySectionLabel.textContent =
-                    "03 // gallery";
-
-                linksSectionLabel.textContent =
-                    "04 // links";
-
-            }
+            pcDropdown.hidden = !pcEnabled;
 
         }
 
@@ -1739,14 +1718,35 @@
 
 
         sections.forEach(section => {
-
-            if (!section.hidden) {
-                observer.observe(section);
-            }
-
+            observer.observe(section);
         });
 
         loadSiteOptions();
+
+
+
+        /*
+         * --------------------------------
+         * SIDEBAR DROPDOWNS
+         * --------------------------------
+         */
+
+        document.querySelectorAll("[data-dropdown]").forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const dropdown =
+                    document.getElementById(
+                        button.dataset.dropdown
+                    );
+
+                if (dropdown) {
+                    dropdown.classList.toggle("collapsed");
+                }
+
+            });
+
+        });
 
 
         /*
@@ -1862,7 +1862,7 @@
 
         const cursorInteractiveTargets =
             document.querySelectorAll(
-                "a, button, .screenshot-wrapper, .viewer-close"
+                "a, button, .nav-dropdown-toggle, .screenshot-wrapper, .viewer-close"
             );
 
 
